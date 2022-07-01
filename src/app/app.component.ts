@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { WeatherService } from './weather.service';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'cards-and-stuff';
+  cityName: any;
+
+  constructor(public weatherService: WeatherService) { }
+
+  ngOnInit() {
+    this.fetchData();
+  }
+
+  fetchData() {
+    this.weatherService.getCityData(this.cityName).subscribe(res => {
+      this.weatherService.weatherData = res;
+    })
+  }
+
 }
